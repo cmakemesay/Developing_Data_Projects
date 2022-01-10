@@ -1,0 +1,31 @@
+---
+title: "Project 2"
+author: "Lucas Falcao Monteiro"
+date: "10/01/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Highlights of the Sao Miguel neighborhood
+
+São Miguel is a neighborhood of East Side São Paulo, and it's located close to the international airport of Guarulhos (Brazil's largest). It is characterized by Northeastern culture, from where many migrants came. Check out some of the highlights.
+
+```{r, echo=FALSE}
+library(leaflet)
+
+locations <- data.frame(lat=c(-23.48596, -23.49134, -23.49343,-23.50041,-23.50940,-23.49061,-23.49277), lng=c(-46.45421,-46.44569,-46.44005,-46.45150,-46.44149,-46.44372,-46.42119))
+
+spicon <- makeIcon(iconUrl = 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Bras%C3%A3o_da_cidade_de_S%C3%A3o_Paulo.svg/200px-Bras%C3%A3o_da_cidade_de_S%C3%A3o_Paulo.svg.png', iconWidth=50, iconHeight=50, iconAnchorX = 16, iconAnchorY = 16)
+
+comments <- c('Park', 'First religious temple in the Sao Paulo State', 'Neighborhood Instance of City Market', 'Neighborhood Instance of City Hall', 'Cemetery','Sao Miguel Train Station', 'Jardim Helena Train Station' )
+
+locations %>% 
+  leaflet() %>%
+  addTiles() %>%
+  addMarkers(popup=comments, clusterOptions= markerClusterOptions(), icon=spicon)
+
+```
+
